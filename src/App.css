@@ -1,0 +1,19 @@
+/* src/App.css */
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  background-color: transparent;
+}
+
+main {
+  width: 100%;
+  background-color: transparent;
+}
+
+/* Section Spacing */
+section {
+  position: relative;
+  z-index: 2;
+  background-color: transparent;
+}

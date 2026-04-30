@@ -1,0 +1,98 @@
+/* src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg-color: #050816;
+  --accent-color: #32b44a;
+  --text-primary: #ffffff;
+  --text-secondary: #a0aec0;
+  --white: #ffffff;
+  --glass-bg: rgba(11, 16, 38, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  --font-primary: 'Outfit', sans-serif;
+  --font-secondary: 'Inter', sans-serif;
+  --transition-smooth: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--accent-color);
+  color: var(--white);
+}
+
+/* Global Noise Texture */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 10000;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Cursor Glow */
+.cursor-glow {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(50, 180, 74, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out;
+}
+
+/* Utilities */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-color) 0%, #288b39 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Section Highlight Animation */
+.section-highlight {
+  animation: sectionPulse 2s ease-out;
+}
+
+@keyframes sectionPulse {
+  0% { box-shadow: inset 0 0 0px rgba(50, 180, 74, 0); }
+  30% { box-shadow: inset 0 0 100px rgba(50, 180, 74, 0.1); }
+  100% { box-shadow: inset 0 0 0px rgba(50, 180, 74, 0); }
+}
