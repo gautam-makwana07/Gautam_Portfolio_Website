@@ -13,20 +13,20 @@ const Loader = ({ onFinished }) => {
 
   useEffect(() => {
     // Smooth counting animation using easeInOutExpo
-    const controls = animate(countValue, 98, {
-      duration: 2.5,
+    const controls = animate(countValue, 100, {
+      duration: 3,
       ease: [0.19, 1, 0.22, 1], // easeInOutExpo approximation
       onUpdate: (latest) => {
         setCount(Math.floor(latest));
       },
       onComplete: () => {
-        // Hold for 300ms then exit
+        // Hold for 400ms then exit
         setTimeout(() => {
           setIsExiting(true);
           setTimeout(() => {
             if (onFinished) onFinished();
           }, 800); // Wait for exit animation
-        }, 300);
+        }, 400);
       }
     });
 
@@ -50,7 +50,7 @@ const Loader = ({ onFinished }) => {
     return Math.sin(progress * Math.PI) * -10;
   });
 
-  const lineWidth = useTransform(countValue, [0, 98], ['0%', '100%']);
+  const lineWidth = useTransform(countValue, [0, 100], ['0%', '100%']);
 
   return (
     <AnimatePresence>

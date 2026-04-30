@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import gojoImg from "../../assets/Satoru_Gojo.png";
+import Lottie from 'lottie-react';
 import './Hero.css';
 
 const Hero = () => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 100]);
+  
+  // Safely resolve Lottie component for different build environments
+  const LottieComponent = Lottie.default || Lottie;
+  
+  // Public Lottie URLs
+  const robotMainUrl = "https://lottie.host/62657e3c-f446-4a41-805c-3083321586b5/WvXUvQ2V5m.json";
+
+  const playSound = () => {
+    const audio = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-rocket-launcher-ignition-1662.mp3");
+    audio.volume = 0.4;
+    audio.play().catch(e => console.log("Audio play failed:", e));
+  };
 
   return (
     <section id="home" className="hero-section">
@@ -46,11 +58,6 @@ const Hero = () => {
                   behavior: "smooth",
                   block: "start",
                 });
-                const contactSection = document.getElementById("contact");
-                if (contactSection) {
-                  contactSection.classList.add("section-highlight");
-                  setTimeout(() => contactSection.classList.remove("section-highlight"), 2000);
-                }
               }}
             >
               Let's Talk
@@ -94,17 +101,18 @@ const Hero = () => {
 
         <motion.div 
           className="hero-visual"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.5, ease: [0.19, 1, 0.22, 1], delay: 1.5 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1], delay: 1.5 }}
         >
-          <div className="signature-avatar-wrapper">
-             <div className="avatar-static-glow"></div>
-             <motion.div
-               className="avatar-static-container"
-             >
-                <img src={gojoImg} alt="Gautam Signature Avatar" className="gojo-img-static" />
-             </motion.div>
+          <div className="lottie-container" onClick={playSound}>
+            <LottieComponent 
+              path={robotMainUrl}
+              loop={true} 
+              autoplay={true}
+              className="main-robot-lottie"
+            />
+            <div className="lottie-glow-effect"></div>
           </div>
         </motion.div>
       </div>

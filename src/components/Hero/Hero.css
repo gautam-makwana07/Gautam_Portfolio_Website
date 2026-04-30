@@ -96,7 +96,7 @@
   letter-spacing: 1px;
 }
 
-/* Stable Signature Avatar Styles */
+/* Lottie Visual Styles */
 .hero-visual {
   position: relative;
   display: flex;
@@ -104,45 +104,51 @@
   align-items: center;
 }
 
-.signature-avatar-wrapper {
+.lottie-container {
   position: relative;
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 5;
 }
 
-.avatar-static-glow {
+.main-robot-lottie {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 30px rgba(50, 180, 74, 0.3));
+}
+
+.mini-robot-bubble {
+  position: absolute;
+  top: -20px;
+  right: 15%;
+  width: 150px;
+  height: 150px;
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(0 0 15px rgba(50, 180, 74, 0.4));
+}
+
+.mini-robot-lottie {
+  width: 100%;
+  height: 100%;
+}
+
+.lottie-glow-effect {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
   background: radial-gradient(circle, rgba(50, 180, 74, 0.15) 0%, transparent 70%);
   border-radius: 50%;
-  filter: blur(40px);
-  z-index: 1;
-}
-
-.avatar-static-container {
-  position: relative;
-  z-index: 5;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.gojo-img-static {
-  width: 100%;
-  height: auto;
-  max-height: 80vh;
-  object-fit: contain;
-  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.3));
-  position: relative;
-  z-index: 6;
+  filter: blur(50px);
+  z-index: -1;
+  pointer-events: none;
 }
 
 @media (max-width: 992px) {
@@ -152,7 +158,7 @@
   .hero-grid {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 50px;
+    gap: 30px;
   }
   .hero-description {
     margin: 0 auto 30px;
@@ -160,12 +166,9 @@
   .hero-actions, .hero-stats {
     justify-content: center;
   }
-  .signature-avatar-wrapper {
-    max-width: 380px;
-    margin: 30px auto 0;
-  }
-  .gojo-img-static {
-    max-height: 50vh;
+  .lottie-container {
+    max-width: 450px;
+    margin: 0 auto;
   }
 }
 
@@ -177,8 +180,11 @@
     flex-direction: column;
     gap: 15px;
   }
-  .signature-avatar-wrapper {
-    max-width: 280px;
-    width: 85vw;
+  .lottie-container {
+    max-width: 320px;
+  }
+  .lottie-hi-bubble {
+    font-size: 18px;
+    padding: 8px 20px;
   }
 }
