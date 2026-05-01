@@ -34,7 +34,11 @@
   transform: translate(-50%, -50%);
   width: 120%;
   height: 120%;
-  background: radial-gradient(circle, rgba(50, 180, 74, 0.15) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(50, 180, 74, 0.15) 0%,
+    transparent 70%
+  );
   border-radius: 50%;
   filter: blur(20px);
   z-index: 1;
@@ -42,8 +46,14 @@
 }
 
 @keyframes halo-pulse {
-  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
-  100% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.6; }
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.6;
+  }
 }
 
 .avatar-ring-outer {
@@ -88,8 +98,10 @@
   object-fit: cover;
   border-radius: 50%;
   display: block;
-  box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .about-profile-image:hover {
@@ -102,7 +114,11 @@
   left: 15%;
   width: 70%;
   height: 30%;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, transparent 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 100%
+  );
   border-radius: 50% 50% 0 0;
   z-index: 7;
   pointer-events: none;
@@ -149,9 +165,18 @@
   white-space: nowrap;
 }
 
-.badge-1 { top: 15%; left: -10%; }
-.badge-2 { bottom: 20%; right: -10%; }
-.badge-3 { top: 60%; left: -5%; }
+.badge-1 {
+  top: 15%;
+  left: -10%;
+}
+.badge-2 {
+  bottom: 20%;
+  right: -10%;
+}
+.badge-3 {
+  top: 60%;
+  left: -5%;
+}
 
 /* Right Side Content */
 .section-label {
@@ -176,6 +201,7 @@
 .highlight {
   background: linear-gradient(135deg, var(--accent-color) 0%, #288b39 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -257,9 +283,16 @@
 }
 
 @media (max-width: 1024px) {
-  .about-grid { gap: 60px; }
-  .section-heading { font-size: 36px; }
-  .profile-image-container { width: 320px; height: 320px; }
+  .about-grid {
+    gap: 60px;
+  }
+  .section-heading {
+    font-size: 36px;
+  }
+  .profile-image-container {
+    width: 320px;
+    height: 320px;
+  }
 }
 
 @media (max-width: 992px) {
@@ -277,7 +310,9 @@
   .about-stats-grid {
     justify-content: center;
   }
-  .badge-1, .badge-2, .badge-3 {
+  .badge-1,
+  .badge-2,
+  .badge-3 {
     display: none;
   }
 }
@@ -286,6 +321,11 @@
   .about-stats-grid {
     grid-template-columns: 1fr;
   }
-  .section-heading { font-size: 28px; }
-  .profile-image-container { width: 240px; height: 240px; }
+  .section-heading {
+    font-size: 28px;
+  }
+  .profile-image-container {
+    width: 240px;
+    height: 240px;
+  }
 }

@@ -15,6 +15,7 @@ const socialLinks = [
 
 const Contact = () => {
   const [focused, setFocused] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
 
   return (
     <section id="contact" className="contact-section">
@@ -46,11 +47,47 @@ const Contact = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
+            action="https://formsubmit.co/ghmakwana9898@gmail.com"
+            method="POST"
+            onSubmit={(e) => {
+              e.preventDefault();
+              const btn = e.target.querySelector('button[type="submit"]');
+              const originalText = btn.innerText;
+              btn.innerText = 'Sending...';
+              
+              const formData = new FormData(e.target);
+
+              fetch("https://formsubmit.co/ajax/ghmakwana9898@gmail.com", {
+                method: "POST",
+                body: formData
+              })
+              .then(response => response.json())
+              .then(data => {
+                if(data.success === "true" || data.success) {
+                  btn.innerText = 'Sent!';
+                  e.target.reset();
+                  setShowPopup(true);
+                  setTimeout(() => setShowPopup(false), 4000);
+                  setTimeout(() => btn.innerText = originalText, 4000);
+                } else {
+                  btn.innerText = 'Error! Try Again.';
+                  setTimeout(() => btn.innerText = originalText, 3000);
+                }
+              })
+              .catch(error => {
+                btn.innerText = 'Error! Try Again.';
+                setTimeout(() => btn.innerText = originalText, 3000);
+              });
+            }}
           >
+            <input type="hidden" name="_captcha" value="false" />
+            
             <div className={`form-group ${focused === 'name' ? 'focused' : ''}`}>
               <label>Full Name</label>
               <input 
                 type="text" 
+                name="name"
+                required
                 onFocus={() => setFocused('name')} 
                 onBlur={() => setFocused(null)} 
                 placeholder="John Doe"
@@ -60,6 +97,8 @@ const Contact = () => {
               <label>Email Address</label>
               <input 
                 type="email" 
+                name="email"
+                required
                 onFocus={() => setFocused('email')} 
                 onBlur={() => setFocused(null)} 
                 placeholder="john@example.com"
@@ -69,12 +108,15 @@ const Contact = () => {
               <label>Your Message</label>
               <textarea 
                 rows="4" 
+                name="message"
+                required
                 onFocus={() => setFocused('message')} 
                 onBlur={() => setFocused(null)} 
                 placeholder="Tell me about your project..."
               ></textarea>
             </div>
             <motion.button 
+              type="submit"
               className="btn btn-primary submit-btn"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -84,6 +126,27 @@ const Contact = () => {
           </motion.form>
         </div>
       </div>
+
+      {/* Success Notification Popup */}
+      <AnimatePresence>
+        {showPopup && (
+          <motion.div 
+            className="success-popup"
+            initial={{ opacity: 0, y: 50, x: "-50%", scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, x: "-50%", scale: 1 }}
+            exit={{ opacity: 0, y: 50, x: "-50%", scale: 0.9 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          >
+            <div className="popup-content">
+              <div className="popup-icon">✓</div>
+              <div className="popup-text">
+                <h4>Message Sent Successfully!</h4>
+                <p>I'll get back to you very soon.</p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

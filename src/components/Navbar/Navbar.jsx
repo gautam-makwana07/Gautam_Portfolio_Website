@@ -13,6 +13,7 @@ const navItems = [
   { name: "About", href: "#about" },
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
+  { name: "Creative", href: "#creative-moments" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -43,7 +44,7 @@ const Navbar = () => {
     };
 
     const observer = new IntersectionObserver(handleIntersection, observerOptions);
-    const sections = ["home", "about", "skills", "projects", "contact"];
+    const sections = ["home", "about", "skills", "projects", "creative-moments", "contact"];
     sections.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
