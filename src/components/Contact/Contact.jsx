@@ -16,6 +16,7 @@ const socialLinks = [
 const Contact = () => {
   const [focused, setFocused] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
+  const [emailError, setEmailError] = useState("");
 
   return (
     <section id="contact" className="contact-section">
@@ -56,6 +57,15 @@ const Contact = () => {
               btn.innerText = 'Sending...';
               
               const formData = new FormData(e.target);
+              
+              const emailValue = formData.get('email');
+              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              if (!emailRegex.test(emailValue)) {
+                setEmailError("Please enter a valid email address.");
+                btn.innerText = originalText;
+                return;
+              }
+              setEmailError("");
 
               fetch("https://formsubmit.co/ajax/ghmakwana9898@gmail.com", {
                 method: "POST",
@@ -81,6 +91,8 @@ const Contact = () => {
             }}
           >
             <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="box" />
+            <input type="hidden" name="_subject" value="🚀 New Inquiry from Portfolio Website!" />
             
             <div className={`form-group ${focused === 'name' ? 'focused' : ''}`}>
               <label>Full Name</label>
@@ -93,16 +105,17 @@ const Contact = () => {
                 placeholder="John Doe"
               />
             </div>
-            <div className={`form-group ${focused === 'email' ? 'focused' : ''}`}>
+            <div className={`form-group ${focused === 'email' ? 'focused' : ''} ${emailError ? 'has-error' : ''}`}>
               <label>Email Address</label>
               <input 
                 type="email" 
                 name="email"
                 required
-                onFocus={() => setFocused('email')} 
+                onFocus={() => { setFocused('email'); setEmailError(''); }} 
                 onBlur={() => setFocused(null)} 
                 placeholder="john@example.com"
               />
+              {emailError && <motion.span initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="error-text">{emailError}</motion.span>}
             </div>
             <div className={`form-group ${focused === 'message' ? 'focused' : ''}`}>
               <label>Your Message</label>
@@ -195,7 +208,7 @@ const SocialIcon = ({ link, index }) => {
       >
         <motion.div 
           className="icon-inner"
-          animate={{ color: isHovered ? '#ffffff' : '#111' }}
+          animate={{ color: isHovered ? '#ffffff' : '#a0aec0' }}
         >
           {link.icon}
         </motion.div>

@@ -4,6 +4,13 @@ import { Stars, Float, PerspectiveCamera, Sparkles, OrbitControls } from '@react
 import * as THREE from 'three';
 import './GalaxyBackground.css';
 
+// Suppress THREE.Clock deprecation warning caused by React Three Fiber internals
+const originalWarn = console.warn;
+console.warn = (...args) => {
+  if (args[0] && typeof args[0] === 'string' && args[0].includes('THREE.Clock')) return;
+  originalWarn(...args);
+};
+
 const RealisticGalaxy = () => {
   const points = useRef();
 
