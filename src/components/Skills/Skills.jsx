@@ -1,6 +1,16 @@
 /* src/components/Skills/Skills.jsx */
 import React from 'react';
 import { motion } from 'framer-motion';
+import { 
+  FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaFigma, FaGithub, FaNpm
+} from 'react-icons/fa';
+import { 
+  SiMongodb, SiCanva, SiAdobephotoshop, SiAdobeillustrator, SiAdobexd 
+} from 'react-icons/si';
+import { VscVscode } from 'react-icons/vsc';
+import { TbTerminal } from 'react-icons/tb';
+import { MdDesignServices } from 'react-icons/md';
+import { IoRocketOutline } from 'react-icons/io5';
 import './Skills.css';
 
 const skillCategories = [
@@ -9,12 +19,12 @@ const skillCategories = [
     description: "Building robust and scalable web applications.",
     type: "progress",
     items: [
-      { name: 'HTML5', level: 95, icon: 'HTML' },
-      { name: 'CSS3', level: 90, icon: 'CSS' },
-      { name: 'JavaScript', level: 92, icon: 'JS' },
-      { name: 'React JS', level: 95, icon: '⚛️' },
-      { name: 'Node JS', level: 85, icon: '🟢' },
-      { name: 'MongoDB', level: 80, icon: '🍃' }
+      { name: 'HTML5', level: 95, icon: <FaHtml5 color="#E34F26" /> },
+      { name: 'CSS3', level: 90, icon: <FaCss3Alt color="#1572B6" /> },
+      { name: 'JavaScript', level: 92, icon: <FaJs color="#F7DF1E" /> },
+      { name: 'React JS', level: 95, icon: <FaReact color="#61DAFB" /> },
+      { name: 'Node JS', level: 85, icon: <FaNodeJs color="#339933" /> },
+      { name: 'MongoDB', level: 80, icon: <SiMongodb color="#47A248" /> }
     ]
   },
   {
@@ -22,12 +32,12 @@ const skillCategories = [
     description: "Crafting visually stunning and user-centric designs.",
     type: "icon-grid",
     items: [
-      { name: 'Figma', icon: 'Fi' },
-      { name: 'Canva', icon: 'Cv' },
-      { name: 'Photoshop', icon: 'Ps' },
-      { name: 'Illustrator', icon: 'Ai' },
-      { name: 'Adobe XD', icon: 'Xd' },
-      { name: 'UI Wireframing', icon: '✏️' }
+      { name: 'Figma', icon: <FaFigma color="#F24E1E" /> },
+      { name: 'Canva', icon: <SiCanva color="#00C4CC" /> },
+      { name: 'Photoshop', icon: <SiAdobephotoshop color="#31A8FF" /> },
+      { name: 'Illustrator', icon: <SiAdobeillustrator color="#FF9A00" /> },
+      { name: 'Adobe XD', icon: <SiAdobexd color="#FF61F6" /> },
+      { name: 'Wireframing', icon: <MdDesignServices color="#A0AEC0" /> }
     ]
   },
   {
@@ -35,11 +45,11 @@ const skillCategories = [
     description: "Modern tools that streamline the development process.",
     type: "badges",
     items: [
-      { name: 'VS Code', icon: '💻' },
-      { name: 'GitHub', icon: 'GH' },
-      { name: 'Antigravity', icon: '🚀' },
-      { name: 'DevTools', icon: '🛠️' },
-      { name: 'npm / Yarn', icon: '📦' }
+      { name: 'VS Code', icon: <VscVscode color="#007ACC" /> },
+      { name: 'GitHub', icon: <FaGithub color="#ffffff" /> },
+      { name: 'Antigravity', icon: <IoRocketOutline color="#32b44a" /> },
+      { name: 'DevTools', icon: <TbTerminal color="#ffffff" /> },
+      { name: 'npm / Yarn', icon: <FaNpm color="#CB3837" /> }
     ]
   },
   {
@@ -132,7 +142,17 @@ const SkillCategoryCard = ({ category, index }) => {
               {category.items.map((item, i) => (
                 <div key={i} className="progress-item">
                   <div className="progress-info">
-                    <span className="item-name">{item.name}</span>
+                    <span className="item-name" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <motion.span 
+                        className="skill-icon-inline"
+                        animate={{ y: [0, -3, 0] }}
+                        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }}
+                        style={{ display: 'flex', fontSize: '18px' }}
+                      >
+                        {item.icon}
+                      </motion.span>
+                      {item.name}
+                    </span>
                     <span className="item-percent">{item.level}%</span>
                   </div>
                   <div className="progress-bar-bg">
@@ -155,9 +175,17 @@ const SkillCategoryCard = ({ category, index }) => {
                 <motion.div 
                   key={i} 
                   className="icon-box"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
-                  <span className="icon-text">{item.icon}</span>
+                  <motion.span 
+                    className="icon-text"
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: i * 0.15 }}
+                    style={{ fontSize: '32px', marginBottom: '8px', display: 'block' }}
+                  >
+                    {item.icon}
+                  </motion.span>
                   <span className="icon-label">{item.name}</span>
                 </motion.div>
               ))}
@@ -170,9 +198,17 @@ const SkillCategoryCard = ({ category, index }) => {
                 <motion.div 
                   key={i} 
                   className="tool-badge"
-                  whileHover={{ backgroundColor: "rgba(50, 180, 74, 0.1)", color: "var(--accent-color)" }}
+                  whileHover={{ backgroundColor: "rgba(50, 180, 74, 0.1)", color: "var(--accent-color)", scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <span className="badge-icon">{item.icon}</span>
+                  <motion.span 
+                    className="badge-icon"
+                    animate={{ rotate: [0, -5, 5, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: i * 0.3 }}
+                    style={{ display: 'flex', fontSize: '16px' }}
+                  >
+                    {item.icon}
+                  </motion.span>
                   {item.name}
                 </motion.div>
               ))}
@@ -185,7 +221,7 @@ const SkillCategoryCard = ({ category, index }) => {
                 <motion.span 
                   key={i} 
                   className="interest-chip"
-                  whileHover={{ y: -5, boxShadow: "0 5px 15px rgba(50, 180, 74, 0.2)" }}
+                  whileHover={{ y: -5, scale: 1.05, boxShadow: "0 5px 15px rgba(50, 180, 74, 0.2)" }}
                 >
                   {item.name}
                 </motion.span>
