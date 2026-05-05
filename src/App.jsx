@@ -17,6 +17,14 @@ function App() {
   const cursorRef = useRef(null);
 
   useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isLoading]);
+
+  useEffect(() => {
     const moveCursor = (e) => {
       if (cursorRef.current) {
         cursorRef.current.style.left = `${e.clientX}px`;
@@ -30,36 +38,39 @@ function App() {
   return (
     <div className="app-container">
       <AnimatePresence mode="wait">
-        {isLoading && (
+        {isLoading ? (
           <Loader key="loader" onFinished={() => setIsLoading(false)} />
+        ) : (
+          <motion.div
+            key="content"
+            initial={{ opacity: 0, scale: 1.1, filter: "blur(20px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            transition={{ 
+              duration: 1.5, 
+              ease: [0.19, 1, 0.22, 1],
+              delay: 0.2 
+            }}
+          >
+            {/* Global Visual Layers */}
+            <GalaxyBackground />
+            <div className="noise-overlay"></div>
+            <div ref={cursorRef} className="cursor-glow"></div>
+            
+            <Navbar />
+            
+            <main>
+              <Hero />
+              <About />
+              <Skills />
+              <Projects />
+              <Contact />
+            </main>
+            
+            <Footer />
+            <ScrollToTop />
+          </motion.div>
         )}
       </AnimatePresence>
-      
-      {!isLoading && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          {/* Global Visual Layers */}
-          <GalaxyBackground />
-          <div className="noise-overlay"></div>
-          <div ref={cursorRef} className="cursor-glow"></div>
-          
-          <Navbar />
-          
-          <main>
-            <Hero />
-            <About />
-            <Skills />
-            <Projects />
-            <Contact />
-          </main>
-          
-          <Footer />
-          <ScrollToTop />
-        </motion.div>
-      )}
     </div>
   );
 }

@@ -1,30 +1,30 @@
 /* src/components/Projects/Projects.jsx */
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import './Projects.css';
 
 const projects = [
   {
-    title: "Luxury E-Commerce",
-    category: "Web Development",
-    tags: ["React", "Node", "Stripe"],
-    image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&q=80&w=800",
+    title: "E-Commerce Hub",
+    category: "Full Stack Development",
+    tags: ["React", "Node.js", "MongoDB", "Stripe"],
+    image: "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800",
     link: "#",
     github: "#"
   },
   {
-    title: "AI Dashboard UI",
-    category: "Product Design",
-    tags: ["Framer", "UI/UX", "Next.js"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
+    title: "Creative Portfolio",
+    category: "Web Design & Dev",
+    tags: ["React", "Framer Motion", "Three.js"],
+    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&q=80&w=800",
     link: "#",
     github: "#"
   },
   {
-    title: "SaaS Platform",
-    category: "Full Stack",
-    tags: ["MongoDB", "Express", "Auth0"],
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+    title: "Brand Identity Design",
+    category: "Graphic Design",
+    tags: ["Photoshop", "Illustrator", "Figma"],
+    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800",
     link: "#",
     github: "#"
   }
@@ -57,6 +57,14 @@ const Projects = () => {
 };
 
 const ProjectCard = ({ project, index }) => {
+  const [isComingSoon, setIsComingSoon] = useState(false);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    setIsComingSoon(true);
+    setTimeout(() => setIsComingSoon(false), 2000);
+  };
+
   return (
     <motion.div 
       className="project-card"
@@ -64,15 +72,54 @@ const ProjectCard = ({ project, index }) => {
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ delay: index * 0.1, duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
       viewport={{ once: true }}
+      onClick={handleClick}
+      style={{ cursor: 'pointer' }}
     >
       <div className="project-image-wrapper">
         <img src={project.image} alt={project.title} className="project-image" />
-        <div className="project-overlay">
-          <div className="project-buttons">
-            <a href={project.link} className="btn-icon">🔗</a>
-            <a href={project.github} className="btn-icon">📁</a>
-          </div>
-        </div>
+        
+        <AnimatePresence>
+          {isComingSoon ? (
+            <motion.div 
+              className="coming-soon-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <div className="cinematic-text-wrapper">
+                {"COMING SOON".split("").map((char, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ y: 20, opacity: 0, filter: "blur(10px)" }}
+                    animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                    transition={{ 
+                      delay: i * 0.05, 
+                      duration: 0.5, 
+                      ease: [0.19, 1, 0.22, 1] 
+                    }}
+                    className="cinematic-letter"
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
+              </div>
+              <motion.div 
+                className="cinematic-line"
+                initial={{ width: 0 }}
+                animate={{ width: "60px" }}
+                transition={{ delay: 0.6, duration: 0.8 }}
+              />
+            </motion.div>
+          ) : (
+            <div className="project-overlay">
+              <div className="project-buttons">
+                <span className="btn-icon">🔗</span>
+                <span className="btn-icon">📁</span>
+              </div>
+            </div>
+          )}
+        </AnimatePresence>
       </div>
       <div className="project-info">
         <span className="project-category">{project.category}</span>
