@@ -5,10 +5,10 @@ import {
   FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaFigma, FaGithub, FaNpm
 } from 'react-icons/fa';
 import { 
-  SiMongodb, SiCanva, SiAdobephotoshop, SiAdobeillustrator, SiAdobexd 
+  SiMongodb, SiCanva 
 } from 'react-icons/si';
 import { VscVscode } from 'react-icons/vsc';
-import { TbTerminal } from 'react-icons/tb';
+import { TbTerminal, TbBrandAdobePhotoshop, TbBrandAdobeIllustrator, TbBrandAdobeXd } from 'react-icons/tb';
 import { MdDesignServices } from 'react-icons/md';
 import { IoRocketOutline } from 'react-icons/io5';
 import './Skills.css';
@@ -34,9 +34,9 @@ const skillCategories = [
     items: [
       { name: 'Figma', icon: <FaFigma color="#F24E1E" /> },
       { name: 'Canva', icon: <SiCanva color="#00C4CC" /> },
-      { name: 'Photoshop', icon: <SiAdobephotoshop color="#31A8FF" /> },
-      { name: 'Illustrator', icon: <SiAdobeillustrator color="#FF9A00" /> },
-      { name: 'Adobe XD', icon: <SiAdobexd color="#FF61F6" /> },
+      { name: 'Photoshop', icon: <TbBrandAdobePhotoshop color="#31A8FF" /> },
+      { name: 'Illustrator', icon: <TbBrandAdobeIllustrator color="#FF9A00" /> },
+      { name: 'Adobe XD', icon: <TbBrandAdobeXd color="#FF61F6" /> },
       { name: 'Wireframing', icon: <MdDesignServices color="#A0AEC0" /> }
     ]
   },
