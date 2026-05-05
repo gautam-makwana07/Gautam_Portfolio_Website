@@ -41,34 +41,35 @@ function App() {
         {isLoading ? (
           <Loader key="loader" onFinished={() => setIsLoading(false)} />
         ) : (
-          <motion.div
-            key="content"
-            initial={{ opacity: 0, scale: 1.1, filter: "blur(20px)" }}
-            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            transition={{ 
-              duration: 1.5, 
-              ease: [0.19, 1, 0.22, 1],
-              delay: 0.2 
-            }}
-          >
-            {/* Global Visual Layers */}
-            <GalaxyBackground />
-            <div className="noise-overlay"></div>
-            <div ref={cursorRef} className="cursor-glow"></div>
-            
+          <div key="website-root">
             <Navbar />
-            
-            <main>
-              <Hero />
-              <About />
-              <Skills />
-              <Projects />
-              <Contact />
-            </main>
-            
-            <Footer />
-            <ScrollToTop />
-          </motion.div>
+            <motion.div
+              key="content"
+              initial={{ opacity: 0, scale: 1.1, filter: "blur(20px)" }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+              transition={{ 
+                duration: 1.5, 
+                ease: [0.19, 1, 0.22, 1],
+                delay: 0.2 
+              }}
+            >
+              {/* Global Visual Layers */}
+              <GalaxyBackground />
+              <div className="noise-overlay"></div>
+              <div ref={cursorRef} className="cursor-glow"></div>
+              
+              <main>
+                <Hero />
+                <About />
+                <Skills />
+                <Projects />
+                <Contact />
+              </main>
+              
+              <Footer />
+              <ScrollToTop />
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </div>
