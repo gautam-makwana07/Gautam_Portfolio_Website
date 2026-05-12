@@ -132,9 +132,25 @@
 
 .progress-bar-fill {
   height: 100%;
-  background: var(--accent-color);
+  background: linear-gradient(90deg, var(--accent-color), #288b39);
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(50, 180, 74, 0.2);
+  position: relative;
+  box-shadow: 0 0 20px rgba(50, 180, 74, 0.4);
+}
+
+.progress-glow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 /* Icon Grid */

@@ -412,7 +412,7 @@
     max-width: 100vw;
     overflow: hidden;
   }
-  
+
   .visual-container {
     transform: scale(0.8);
   }
@@ -465,7 +465,7 @@
   .btn-outline {
     width: 100%;
   }
-  
+
   .hero-stats {
     gap: 12px;
   }

@@ -46,11 +46,25 @@ const Projects = () => {
           <p className="section-desc">Selected projects crafted with focus on detail and performance.</p>
         </div>
 
-        <div className="projects-grid">
+        <motion.div 
+          className="projects-grid"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.2
+              }
+            }
+          }}
+        >
           {projects.map((project, index) => (
             <ProjectCard key={index} project={project} index={index} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -68,10 +82,15 @@ const ProjectCard = ({ project, index }) => {
   return (
     <motion.div 
       className="project-card"
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ delay: index * 0.1, duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
-      viewport={{ once: true }}
+      variants={{
+        hidden: { opacity: 0, y: 50, scale: 0.9 },
+        visible: { 
+          opacity: 1, 
+          y: 0, 
+          scale: 1,
+          transition: { duration: 0.8, ease: [0.19, 1, 0.22, 1] }
+        }
+      }}
       onClick={handleClick}
       style={{ cursor: 'pointer' }}
     >

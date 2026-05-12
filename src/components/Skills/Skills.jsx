@@ -162,7 +162,9 @@ const SkillCategoryCard = ({ category, index }) => {
                       whileInView={{ width: `${item.level}%` }}
                       transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 + (i * 0.1) }}
                       viewport={{ once: true }}
-                    />
+                    >
+                      <div className="progress-glow"></div>
+                    </motion.div>
                   </div>
                 </div>
               ))}
